@@ -3,17 +3,18 @@ import axios from 'axios';
 
 let chatClient;
 
-export default function createChannel(identity, displayName) {
+export default function createChannel(displayName) {
+    let identity;
     return axios
-        .post('http://localhost:4000/token', {
-            identity
-        })
+        .post('http://localhost:4000/token2')
         .then(response => {
-            return Client.create(response.data);
+            identity = response.data.identity;
+            return Client.create(response.data.token);
         })
         .then(client => {
             chatClient = client;
-            return axios.post('http://localhost:4000/channel', {
+            return axios.post('http://localhost:4000/channel2', {
+                identity,
                 displayName
             });
         })

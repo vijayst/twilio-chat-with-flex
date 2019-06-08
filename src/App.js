@@ -7,7 +7,7 @@ export default function App() {
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-        createChannel('vijayst@gmail.com', 'Vijay Thirugnanam').then(
+        createChannel('Vijay Thirugnanam 2').then(
             channel => {
                 setChannel(channel);
             }
