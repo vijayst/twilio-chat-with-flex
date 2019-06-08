@@ -1,26 +1,17 @@
-const AccessToken = require('twilio').AccessToken;
-const IpMessagingGrant = AccessToken.IpMessagingGrant;
+import { jwt } from 'twilio';
+const { AccessToken } = jwt;
+const { ChatGrant } = AccessToken;
 
-// Used when generating any kind of tokens
-const twilioAccountSid = 'ACxxxxxxxxxx';
-const twilioApiKey = 'SKxxxxxxxxxx';
-const twilioApiSecret = 'xxxxxxxxxxxx';
-
-// Used specifically for creating IP Messaging tokens
-const serviceSid = 'ISxxxxxxxxxxxxx';
-const identity = 'user@example.com';
-
-// Create a "grant" which enables a client to use IPM as a given user,
-// on a given device
-const ipmGrant = new IpMessagingGrant({
-  serviceSid: serviceSid,
-});
-
-// Create an access token which we will sign and return to the client,
-// containing the grant we just created
-const token = new AccessToken(twilioAccountSid, twilioApiKey, twilioApiSecret);
-token.addGrant(ipmGrant);
-token.identity = identity;
-
-// Serialize the token to a JWT string
-console.log(token.toJwt());
+export default function generateAccessToken(identity) {
+    const chatGrant = new ChatGrant({
+        serviceSid: process.env.SERVICE_SID
+    });
+    const token = new AccessToken(
+        process.env.TWILIO_ACCOUNT_SID,
+        process.env.TWILIO_API_KEY,
+        process.env.TWILIO_API_SECRET
+    );
+    token.addGrant(chatGrant);
+    token.identity = identity;
+    return token.toJwt();
+}
