@@ -4,7 +4,8 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "start": "nodemon --exec babel-node index.js"
+        "start": "nodemon --exec babel-node index.js",
+        "channel": "babel-node createChannel.js"
     },
     "dependencies": {
         "body-parser": "^1.19.0",
