@@ -1,0 +1,8 @@
+{
+  "name": "twilio-chat-with-flex",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:vijayst/twilio-chat-with-flex.git",
+  "author": "vijayst <vijayst@gmail.com>",
+  "license": "MIT"
+}
