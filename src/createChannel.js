@@ -1,4 +1,4 @@
-import Chat from 'twilio-chat';
+import { Client } from 'twilio-chat';
 import axios from 'axios';
 
 let chatClient;
@@ -9,15 +9,19 @@ export default function createChannel(identity, displayName) {
             identity
         })
         .then(response => {
-            return Chat.Client.create(response.data);
+            return Client.create(response.data);
         })
         .then(client => {
             chatClient = client;
-            axios.post('http://localhost:4000/channel', {
+            return axios.post('http://localhost:4000/channel', {
                 displayName
             });
         })
         .then(response => {
             return chatClient.getChannelBySid(response.data);
+        })
+        .then(channel => {
+            channel.join();
+            return channel;
         });
 }
