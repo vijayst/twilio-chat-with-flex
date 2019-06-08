@@ -1,17 +1,18 @@
-import { jwt } from 'twilio';
-const { AccessToken } = jwt;
-const { ChatGrant } = AccessToken;
+import axios from 'axios';
 
-export default function generateAccessToken(identity) {
-    const chatGrant = new ChatGrant({
-        serviceSid: process.env.SERVICE_SID
+export default function generateAccessToken2() {
+    return axios.post(
+        `https://preview.twilio.com/iam/Accounts/${
+            process.env.FLEX_ACCOUNT_SID
+        }/Tokens`,
+        { products: ['flex'] },
+        {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }
+    ).then(response => {
+        return response.data;
     });
-    const token = new AccessToken(
-        process.env.TWILIO_ACCOUNT_SID,
-        process.env.TWILIO_API_KEY,
-        process.env.TWILIO_API_SECRET
-    );
-    token.addGrant(chatGrant);
-    token.identity = identity;
-    return token.toJwt();
 }

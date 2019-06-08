@@ -7,14 +7,14 @@ export default function createChannel(displayName) {
     console.log(displayName);
     let identity;
     return axios
-        .post('http://localhost:4000/token2')
+        .post('http://localhost:4000/token')
         .then(response => {
             identity = response.data.identity;
             return Client.create(response.data.token);
         })
         .then(client => {
             chatClient = client;
-            return axios.post('http://localhost:4000/channel2', {
+            return axios.post('http://localhost:4000/channel', {
                 identity,
                 displayName
             });
