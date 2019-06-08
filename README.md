@@ -5,7 +5,6 @@ Use Twilio Chat SDK along with Twilio Flex. Makes use of Undocumented Preview AP
 ## Twilio Chat SDK
 
 - [Twilio Chat NPM Package](https://www.npmjs.com/package/twilio-chat)
-- [Create Access Token](https://www.twilio.com/docs/chat/create-tokens)
 
 ## Tech support (Twilio)
 
