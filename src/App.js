@@ -2,16 +2,34 @@ import React, { useEffect, useState } from 'react';
 import './app.css';
 import createChannel from './createChannel';
 
+function Messages({ messages }) {
+    function getClassName(message) {
+        const sender = messages[messages.length - 1].author;
+        return message.author === sender
+            ? 'message message--sent'
+            : 'message message--received';
+    }
+
+    return messages.map((m, i) => (
+        <div key={i} className={getClassName(m)}>{m.body}</div>
+    ));
+}
+
 export default function App() {
     const [channel, setChannel] = useState(null);
     const [message, setMessage] = useState('');
+    let [messages, setMessages] = useState([]);
 
     useEffect(() => {
-        createChannel(new Date().getTime()).then(
-            channel => {
-                setChannel(channel);
-            }
-        );
+        createChannel('Vijay').then(channel => {
+            setChannel(channel);
+            channel.on('messageAdded', message => {
+                console.log('message', message);
+                messages = messages.slice();
+                messages.unshift({ body: message.body, author: message.author });
+                setMessages(messages);
+            });
+        });
     }, []);
 
     function handleSubmit() {
@@ -32,14 +50,11 @@ export default function App() {
         }
     }
 
+
+
     return (
         <div className="message-container">
-            <div className="message message--received">
-                <p>Hi !</p>
-            </div>
-            <div className="message message--sent">
-                <p>Hello</p>
-            </div>
+            <Messages messages={messages} />
             <div className="message message--received">
                 <p>How can i help you?</p>
             </div>
