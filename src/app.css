@@ -1,0 +1,39 @@
+.message-container {
+    width: 30rem;
+    border: 1px solid #cacaca;
+    font-size: 1.2rem;
+}
+
+.message {
+    margin: 2rem;
+    padding: 1rem 2rem;
+    border-radius: 6px;
+}
+
+.message--sent {
+    text-align: right;
+    background-color: white;
+    color: #13988a;
+}
+
+.message--received {
+    background: #13988a;
+    color: white;
+}
+
+.message-container__send {
+    border-top: 1px solid #cacaca;
+    margin-top: 2.4rem;
+}
+
+.message-container__input {
+    box-sizing: border-box;
+    border: none;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    outline: none;
+    resize: none;
+    font-size: 1.2rem;
+}
