@@ -7,7 +7,7 @@ export default function App() {
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-        createChannel('Vijay Thirugnanam 2').then(
+        createChannel(new Date().getTime()).then(
             channel => {
                 setChannel(channel);
             }
